@@ -13,6 +13,14 @@ const { environment } = require('@rails/webpacker')
 const webpack = require('webpack')
 
 environment.plugins.append(
+  'Chart',
+  new webpack.optimize.CommonsChunkPlugin({
+    name: 'chart',
+    filename: 'chart.js'
+  })
+)
+
+environment.plugins.append(
   'CommonsChunkVendor',
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
