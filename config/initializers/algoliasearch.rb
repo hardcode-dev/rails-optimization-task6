@@ -3,6 +3,8 @@ AlgoliaSearch.configuration = {
   api_key: ApplicationConfig["ALGOLIASEARCH_API_KEY"]
 }
 
+::ALGOLIASEARCH_PUBLIC_SEARCH_ONLY_KEY = "test_test_test".freeze
+
 if Rails.env.test?
   ::ALGOLIASEARCH_PUBLIC_SEARCH_ONLY_KEY = "test_test_test".freeze
 else
