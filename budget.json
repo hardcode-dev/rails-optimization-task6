@@ -2,6 +2,9 @@
   "budget": {
     "requests": {
       "total": 50
+    },
+    "transferSize": {
+      "javascript": 460000
     }
   }
 }
