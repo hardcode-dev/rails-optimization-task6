@@ -19,6 +19,8 @@ vendor/bundle
 coverage
 /tags
 
+/sitespeed-result/*
+
 # Ignore public uploads
 /public/uploads/*
 /public/c/*
