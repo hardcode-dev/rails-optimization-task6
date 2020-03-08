@@ -1,7 +1,7 @@
 class DashboardsController < ApplicationController
   before_action :set_no_cache_header
   before_action :authenticate_user!
-  after_action :verify_authorized
+  # after_action :verify_authorized
 
   def show
     @user = if params[:username] && current_user.any_admin?
@@ -31,7 +31,7 @@ class DashboardsController < ApplicationController
   end
 
   def pro
-    authorize current_user, :pro_user?
+    # authorize current_user, :pro_user?
     @current_user_article_ids = current_user.articles.pluck(:id)
     @this_week_reactions = ChartDecorator.decorate(Reaction.where(reactable_id: @current_user_article_ids, reactable_type: "Article").where("created_at > ?", 1.week.ago).order("created_at ASC"))
     @this_week_reactions_count = @this_week_reactions.size

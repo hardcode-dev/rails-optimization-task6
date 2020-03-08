@@ -1,12 +1,12 @@
 import Loadable from 'react-loadable';
 
 const loadableReactionsChart = Loadable({
-  loader: () => import('../reactions.js'),
+  loader: () => import('../chartComponents.js').commentsChartComponent,
   loading: () => <div>Loading...</div>,
 });
 
 const loadableCommentsChart = Loadable({
-  loader: () => import('../comments.js'),
+  loader: () => import('../chartComponents.js').reactionsChartComponent,
   loading: () => <div>Loading...</div>,
 });
 
