@@ -31,4 +31,12 @@ environment.plugins.append(
   })
 )
 
+environment.plugins.append(
+  'Chart',
+  new webpack.optimize.CommonsChunkPlugin({
+    name: 'chart',
+    filename: 'chart.js'
+  })
+)
+
 module.exports = environment

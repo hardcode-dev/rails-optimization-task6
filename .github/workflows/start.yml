@@ -1,0 +1,15 @@
+name: START
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: check budgetx
+      uses: actions/checkout@v1
+    - name: run sitespeedio
+      uses: docker://sitespeedio/sitespeed.io:9.8.1-action
+      with:
+        args: http://27d831d7.ngrok.io -n 1 --budget.configPath /github/workspace/homeBudget.json
