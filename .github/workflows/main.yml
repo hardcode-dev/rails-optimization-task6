@@ -1,0 +1,13 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: run sitespeedio test
+        uses: docker://sitespeedio/sitespeed.io:12.0.1-action
+        with:
+          args: https://657e27de.ngrok.io -n 1 --budget.configPath /github/workspace/.github/budget.json
