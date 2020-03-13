@@ -1,4 +1,5 @@
 import { h, render } from 'preact';
+import marked from 'marked';
 import { getUserDataAndCsrfToken } from '../chat/util';
 import Chat from '../chat/chat';
 
