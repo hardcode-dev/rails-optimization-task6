@@ -1,3 +1,4 @@
+import moment from 'moment';
 import Chart from 'chart.js';
 
 const reactionsCanvas = document.getElementById('reactionsChart');
