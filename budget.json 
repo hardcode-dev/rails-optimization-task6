@@ -1,0 +1,10 @@
+{
+  "budget": {
+    "requests": {
+      "total": 50
+    },
+    "transferSize": {
+      "javascript": 510000
+    }
+  }
+}
