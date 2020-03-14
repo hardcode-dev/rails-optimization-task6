@@ -1,0 +1,16 @@
+
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v1
+      - name: run sitespeedio test
+        uses: docker://sitespeedio/sitespeed.io:9.8.1-action
+        with:
+          args:  https://thinknetica.railsdev.site -n 1 --budget.configPath /github/workspace/homeBudget.json
