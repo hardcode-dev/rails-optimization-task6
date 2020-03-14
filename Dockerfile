@@ -36,6 +36,6 @@ ARG AWS_SECRET
 ARG AWS_BUCKET_NAME
 ARG AWS_REGION
 
-RUN yarn install --frozen-lockfile --no-cache --production && RAILS_ENV=${RAILS_ENV} DB_ADAPTER=nulldb bundle exec rake assets:precompile
+RUN yarn install --frozen-lockfile --no-cache --production
 
 CMD bundle exec puma -C config/puma.rb

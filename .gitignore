@@ -24,6 +24,7 @@ coverage
 /public/c/*
 /public/i/*
 /public/assets/*
+/public/packs/*
 
 # Ignore node_modules
 node_modules/
