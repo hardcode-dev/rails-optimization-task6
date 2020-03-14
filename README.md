@@ -1,72 +1,38 @@
 # Задание №6
 
-## Оптимизация загрузки js на dev.to и настройка `CI`
+- развернул проект
 
-На всех страницах `dev.to` загружается файл `vendor.js`.
+- создал файл с бюджетом
 
-Анализ показывает, что этот файл содержит библиотеку `moment.js`, печально известную своим большим размером.
+- проверил бюджет
 
-## Бюджет
+`sudo docker run --rm -v "$(pwd)":/sitespeed.io sitespeedio/sitespeed.io https://310324c4.ngrok.io -n 1 --budget.configPath config/homeBudget.json`
 
-Давайте начнём с того, что зададимся бюджетом на объём `js` на главной странице.
-
-Создайте бюджет для `sitespeed.io`
-
-```json
-{
-  "budget": {
-    "transferSize": {
-      "javascript": 460000
-    }
-  }
-}
+```
+Failing budgets [1]
+https://310324c4.ngrok.io	JavaScript Transfer Size with value 1.0 MB limit max 449.2 KB
 ```
 
-Убедитесь, что бюджет пока не соблюдается:
+- поменял настройки webpack-bundle-analyzer
 
-```bash
-docker run --privileged --rm -v "$(pwd)":/sitespeed.io sitespeedio/sitespeed.io http://host.docker.internal:3000/ -n 1 --budget.configPath homeBudget.json
+- проверил размер с webpack-bundle-analyzer `bin/webpack-dev-server`
+
+нашел moment.js, он есть но странно я нашел, что он занимает 147,4kb
+
+закоментил `proCharts.js`
+
+```
+Failing budgets [1]
+https://310324c4.ngrok.io	JavaScript Transfer Size with value 451.6 KB limit max 449.2 KB
 ```
 
-## Идея оптимизации
+магия
 
-- Включите в процесс сборки `webpack` плагин `webpack-bundle-analyzer`
-- Выполните анализ исходной версии приложения с помощью `webpack-bundle-analyzer`
-- убедитесь, что `moment.js` входит в сборку `vendor`
-- Закомментируйте всё содержимое файла `proCharts.js`
-- Выполните анализ изменённой версии в `webpack-bundle-analyzer`
-- profit
+где используется не нашел к сожалению
 
-## Cleanup
+- работал через ngrok
 
-Разберитесь, в каком месте приложения код `moment.js` реально используется и подключите его только там.
-
-## Защита от деградации
-
-Мы сократили объём загружаемого `js` на большинстве страниц сайта!
-
-Теперь проверка бюджета на главной странице должна пройти успешно!
-
-
-## Настройка CI
-
-Теперь настроим `CI`: `Travis` или `Github Actions`.
-
-Шаги:
-- выставить текущую версию приложения в интернет с помощью `ngrok`
-- запушить урл `ngrok` в конфиг `CI` в `github` и тем самым триггернуть билд
-- билд должен проверять ваше приложение по урлу `ngrok` с помощью `sitespeed.io` на соблюдение бюджета
-- после проверки `ngrok` можно выключать
-
-## Как сдать задание
-
-Сделать `PR` в этот репозиторий, содержащий:
-
-- изменения кода
-- описание
-- скриншоты `bundle-analyzer` до и после оптимизации
-- настроенный `CI` на `Travis` или `Github Actions`
-
+- добавил github action
 
 <div align="center">
   <br>
