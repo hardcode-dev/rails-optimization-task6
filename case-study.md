@@ -10,4 +10,4 @@
 ## UPD check revue notes
 
 - Поправил main.yml
-- Поправил environment.js [результат](https://prnt.sc/ri6vuf)
+- Поправил environment.js [результат](https://prnt.sc/ri6vuf) [sitespeed](https://prnt.sc/ri74lj)
