@@ -54,4 +54,4 @@ package-lock.json
 #sitemap
 /public/sitemap.xml.gz
 .eslintrc.yml
-
+sitespeed-result/
