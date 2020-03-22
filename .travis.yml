@@ -32,25 +32,16 @@ before_script:
 script:
   - bundle exec rails webpacker:compile
   - bundle exec rake db:schema:load
-  - './cc-test-reporter before-build'
-  - 'bundle exec rspec spec --color --tty'
-  - '[ ! -f .approvals ] || bundle exec approvals verify --ask false'
-  - './cc-test-reporter format-coverage -t simplecov -o coverage/codeclimate.simplecov.json'
-  - 'yarn test --colors'
-  - './cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.lcov.json'
-  - './cc-test-reporter sum-coverage coverage/codeclimate.*.json'
-  - './cc-test-reporter upload-coverage'
-  - 'bundle exec bundle-audit check --update'
+#  - './cc-test-reporter before-build'
+#  - 'bundle exec rspec spec --color --tty'
+#  - '[ ! -f .approvals ] || bundle exec approvals verify --ask false'
+#  - './cc-test-reporter format-coverage -t simplecov -o coverage/codeclimate.simplecov.json'
+#  - 'yarn test --colors'
+#  - './cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.lcov.json'
+#  - './cc-test-reporter sum-coverage coverage/codeclimate.*.json'
+#  - './cc-test-reporter upload-coverage'
+#  - 'bundle exec bundle-audit check --update'
   - yarn build-storybook
-deploy:
-  provider: heroku
-  api_key: '$HEROKU_AUTH_TOKEN'
-  app:
-    master: practicaldev
-  run:
-    - rake db:migrate
-after_deploy:
-  - bash after_deploy.sh
 notifications:
   slack:
     on_pull_requests: false
