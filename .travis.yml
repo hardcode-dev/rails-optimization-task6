@@ -42,7 +42,7 @@ script:
 #  - './cc-test-reporter upload-coverage'
 #  - 'bundle exec bundle-audit check --update'
   - yarn build-storybook
-  - docker run --privileged -v "$(pwd)":/sitespeed.io sitespeedio/sitespeed.io --budget.configPath /spec/budget.json-n 1 https://0a8bb3d3.ngrok.io
+  - docker run --privileged -v "$(pwd)":/sitespeed.io sitespeedio/sitespeed.io --budget.configPath /spec/budget.json -n 1 https://0a8bb3d3.ngrok.io
 
 notifications:
   slack:
