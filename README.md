@@ -1,5 +1,7 @@
 # Задание №6
 
+![Build Status](https://travis-ci.org/volartm/rails-optimization-task6.svg?branch=master)
+
 ## Оптимизация загрузки js на dev.to и настройка `CI`
 
 На всех страницах `dev.to` загружается файл `vendor.js`.
@@ -47,12 +49,12 @@ docker run --privileged --rm -v "$(pwd)":/sitespeed.io sitespeedio/sitespeed.io 
 
 Теперь проверка бюджета на главной странице должна пройти успешно!
 
-
 ## Настройка CI
 
 Теперь настроим `CI`: `Travis` или `Github Actions`.
 
 Шаги:
+
 - выставить текущую версию приложения в интернет с помощью `ngrok`
 - запушить урл `ngrok` в конфиг `CI` в `github` и тем самым триггернуть билд
 - билд должен проверять ваше приложение по урлу `ngrok` с помощью `sitespeed.io` на соблюдение бюджета
@@ -66,7 +68,6 @@ docker run --privileged --rm -v "$(pwd)":/sitespeed.io sitespeedio/sitespeed.io 
 - описание
 - скриншоты `bundle-analyzer` до и после оптимизации
 - настроенный `CI` на `Travis` или `Github Actions`
-
 
 <div align="center">
   <br>
