@@ -44,7 +44,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def pro_user?
-    current_user?
+    current_user? && user.has_role?(:pro)
   end
 
   def moderation_routes?
