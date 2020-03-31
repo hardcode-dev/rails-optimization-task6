@@ -1,0 +1,14 @@
+name: CI
+# This workflow is triggered on pushes to the repository.
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v1
+      - name: run sitespeedio test
+        uses: docker://sitespeedio/sitespeed.io:9.8.1-action
+        with:
+          args: https://d51a5501.ngrok.io -n 1  --budget.configPath /github/workspace/budget.json
