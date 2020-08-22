@@ -19,6 +19,9 @@ environment.plugins.append(
       return (
         module.context &&
         module.context.indexOf('node_modules') !== -1 &&
+        module.context.indexOf('vendor') === -1 &&
+        module.context.indexOf('twillio') === -1 &&
+        module.context.indexOf('sockjs') === -1 &&
         module.context.indexOf('moment') === -1 &&
         module.context.indexOf('chart.js') === -1
       );
