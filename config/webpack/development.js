@@ -6,7 +6,6 @@ environment.plugins.append(
   'BundleAnalyzer',
   new BundleAnalyzerPlugin({
     analyzerMode: 'static',
-    reportFilename: '/home/mikeoil/opt/rails-optimization-task6/report.html',
     openAnalyzer: true,
   }),
 );
