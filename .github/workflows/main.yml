@@ -10,6 +10,6 @@ jobs:
       - name: checkout code
         uses: actions/checkout@v1
       - name: run sitespeedio test
-        uses: docker://sitespeedio/sitespeed.io:14.0.3-action
+        uses: docker://sitespeedio/sitespeed.io:12.11.0-action
         with:
-          args: http://7f7cfb339cb1.ngrok.io -n 1 --budget.configPath /github/workspace/sitespeed_budget.json
+          args: http://7f7cfb339cb1.ngrok.io -n 1 --budget.configPath /sitespeed_budget.json
