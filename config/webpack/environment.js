@@ -8,27 +8,34 @@
 
 // module.exports = environment;
 
-
-const { environment } = require('@rails/webpacker')
-const webpack = require('webpack')
+const { environment } = require('@rails/webpacker');
+const webpack = require('webpack');
 
 environment.plugins.append(
   'CommonsChunkVendor',
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
-    minChunks: (module) => {
+    minChunks: module => {
       // this assumes your vendor imports exist in the node_modules directory
-      return module.context && module.context.indexOf('node_modules') !== -1
-    }
-  })
-)
+      return (
+        module.context &&
+        module.context.includes('node_modules') &&
+        !module.context.includes('moment') &&
+        !module.context.includes('chart.js') &&
+        !module.context.includes('chartjs-color') &&
+        !module.context.includes('@twilio') &&
+        !module.context.includes('marked/lib')
+      );
+    },
+  }),
+);
 
 environment.plugins.append(
   'CommonsChunkManifest',
   new webpack.optimize.CommonsChunkPlugin({
     name: 'manifest',
-    minChunks: Infinity
-  })
-)
+    minChunks: Infinity,
+  }),
+);
 
-module.exports = environment
+module.exports = environment;
