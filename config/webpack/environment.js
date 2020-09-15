@@ -8,27 +8,42 @@
 
 // module.exports = environment;
 
-
-const { environment } = require('@rails/webpacker')
-const webpack = require('webpack')
+const { environment } = require('@rails/webpacker');
+const webpack = require('webpack');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 environment.plugins.append(
   'CommonsChunkVendor',
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
-    minChunks: (module) => {
+    minChunks: ({ context }) => {
       // this assumes your vendor imports exist in the node_modules directory
-      return module.context && module.context.indexOf('node_modules') !== -1
-    }
-  })
-)
+      return (
+        context &&
+        context.indexOf('node_modules') !== -1 &&
+        !context.includes('moment') &&
+        !context.includes('chart.js') &&
+        !context.includes('chartjs-color') &&
+        !context.includes('color-name')
+      );
+    },
+  }),
+);
 
 environment.plugins.append(
   'CommonsChunkManifest',
   new webpack.optimize.CommonsChunkPlugin({
     name: 'manifest',
-    minChunks: Infinity
-  })
-)
+    minChunks: Infinity,
+  }),
+);
 
-module.exports = environment
+environment.plugins.append(
+  'BundleAnalyzer',
+  new BundleAnalyzerPlugin({
+    analyzerMode: 'static',
+    openAnalyzer: true,
+  }),
+);
+
+module.exports = environment;
