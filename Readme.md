@@ -1,61 +1,196 @@
-# Задание №4
+# Задание №5
 
-## Цели выполнения задания
+## Цели задания
 
-- Попрактиковаться в настройке мониторинга
-- Попрактиковаться в поиске возможностей для оптимизации
-- Попрактиковаться в проверке гипотез и обосновании предложений по оптимизации
-- Познакомиться с интересным живым `Rails` `open-source` проектом
+В этом задании немного попрактикуемся с `HTTP/2` в `Rails`.
 
-## Подготовка
+Польза:
 
-- Завести `dev.to` локально (прямо в этом репозитории, не нужно клонировать `dev.to` от них, иначе будут отличаться версии)
-- Настроить свой `NewRelic` для мониторинга локального `dev.to`
-- Настроить свой `Skylight` / `Scout` / `Datadog` для мониторинга локального dev.to
-- Настроить свой `Prometheus` + `Grafana` для мониторинга локального `dev.to`
-- Настроить `rack-mini-profiler`
-- Настроить `rails-panel`
-- Сделать возможность запуска проекта в `local_production`
+- научиться настраивать `HTTPS` для локального `Rails`-приложения
+- научиться настраивать `HTTP/2` `reverse proxy` с поддержкой `server-push`
+- научиться делать `server-push`, сравнить его с `inlining`
 
-### local_production
+## ToDo
 
-Можно либо
+Работать будем на примере проекта `dev.to`, как и в прошлом задании.
 
-- сделать новый `environment`, `local_production`
-- использовать `production`, но найти способ переопределить нужные настройки локально
+Ресурсы:
 
-Основное, что должно отличать ваш `local_production` от `development`:
+- https://github.com/FiloSottile/mkcert - инструмент для настройки локальных сертификатов одной командой
+- https://www.nginx.com/blog/nginx-1-13-9-http2-server-push/ - настройка `http2-server-push` в `NGinx`.
+- https://github.com/surma/http2-push-detect - утилита для проверки `server-push`
+- http://railscasts.com/episodes/357-adding-ssl?view=asciicast - старый, но очень понятный `RailsCast` про `ssl`
 
-- `cache_classes: true`
-- `eager_load: true`
-- `perform_caching: true`
-- `assets_debug: false`
-- `assets_compile: false`
+### Шаг 1. Настроить сертификат для локального HTTPS
 
-Для работы потребуется прекомпиляция ассетов `rake assets:precompile`
+Можно сделать с использованием `mkcert`
 
-## Оптимизация
+### Шаг 2. Настраиваем NGinx как reverse-proxy
 
-Все инструменты мониторинга показывают, что самой горячей точкой является главная страница, `StoriesController#index`.
+Установить или обновить `NGinx`.
 
-В частности, заметное время занимает рендеринг `partial`-ов `_single_story.html.erb`.
+Конфигурируем `NGinx` так, чтобы он принимал `https`-запросы `https://localhost` и ходил в `upstream` на `http://localhost:3000`.
 
-Рассмотрите гипотезу о том, что можно закешировать `<%= render "articles/single_story", story: story %>` в `_main_stories_feed.html.erb` и это даст заметный эффект.
+```
+server {
+  listen       443 ssl;
+  server_name  localhost;
 
-- Не забудьте включить локальное кэширование (`touch tmp/caching-dev.txt`)
-- Сделайте `benchmark` с помощью `ab`
-- Сделайте оптимизацию
-- Перезапустите `benchmark`
+  ssl_certificate      /path/to/localhost.pem;
+  ssl_certificate_key  /path/to/localhost-key.pem;
+  ssl_session_timeout  5m;
+  ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+  ssl_ciphers 'ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:DES-CBC3-SHA:!RC4:!aNULL:!eNULL:!MD5:!EXPORT:!EXP:!LOW:!SEED:!CAMELLIA:!IDEA:!PSK:!SRP:!SSLv:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA';
+  ssl_prefer_server_ciphers   on;
 
-Если вы посчитаете, что применить кэширование здесь целесообразно, оформите обоснованный `PR` с этим предложением. Напишите в описании `PR`, какая была гипотеза, откуда она взялась, как вы проверяли гипотезу, какие результаты получили. Приложите скриншоты графиков мониторинга, если на них виден эффект оптимизации.
+  location / {
+    proxy_set_header Host $host;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto https;
+    proxy_redirect off;
+    proxy_pass http://127.0.0.1:3000;
+  }
+}
+```
 
-## Bonus
+На этом шаге браузер должен успешно открывать `https://localhost`
 
-Поищите возможности для оптимизации самостоятельно. Если сможете что-то найти и оптимизировать, добавляйте в `PR` ваши оптимизации с обоснованиями.
+### Шаг 3. Настроить HTTP/2 и server-push
 
-## Сдача задания
+Дополняем конфиг `NGinx` поддержкой `HTTP/2` и `server-push`
 
-`PR` в этот репозиторий с кодом и подробным описанием проделанной работы в описании `PR`-а.
+```
+server {
+  listen  443 http2 ssl;
+  #...
+
+  location /{
+    http2_push_preload on;
+    #...
+  }
+}
+```
+
+### Шаг 4. Поэксперементировать с HTTP/2 server-push
+
+На главном экране в мобильном виде `dev.to` есть ряд картинок:
+
+- `connect.svg`
+- `bell.svg`
+- `menu.svg`
+- `stack.svg`
+- `lightning.svg`
+
+![Screenshot](https://github.com/spajic/task-5/blob/master/screenshot.png?raw=true)
+
+Картинки из меню: `connect.svg`, `bell.svg`, `menu.svg` – заинлайнены.
+Картинки `stack.svg` и `lightning.svg` – нет.
+
+Попробуйте перезагружать эту страницу с эмуляцией медленного соединения и посмотреть как рендерятся эти картинки при перезагрузке.
+
+Дальше, давайте попробуем двинуться в сторону подхода `HTTP/2` и не будем инлайнить `svg`, а подключим их как обычные картинки.
+
+Например, `image_tag("bell.svg", size: "100% * 100%")`
+
+Теперь давайте добавим `server-push`!
+
+Для этого нам нужно установить специальные заголовки:
+
+```
+# stories_controller.rb
+def index
+  push_headers = [
+    "<#{view_context.asset_path('bell.svg')}>; rel=preload; as=image",
+    "<#{view_context.asset_path('menu.svg')}>; rel=preload; as=image",
+    "<#{view_context.asset_path('connect.svg')}>; rel=preload; as=image",
+    "<#{view_context.asset_path('stack.svg')}>; rel=preload; as=image",
+    "<#{view_context.asset_path('lightning.svg')}>; rel=preload; as=image",
+  ]
+  response.headers['Link'] = push_headers.join(', ')
+  # ...
+end
+```
+
+На этом шаге нужно убедиться, что `server-push` работает.
+
+В `Chrome` `DevTools` в панели `Network` вы должны увидеть, что запросы к этим картинкам делаются по протоколу `h2`, а `Initiator` = `Push/Other`
+
+Ещё один способ проверить работу `server-push` - утилита `http2-push-detect`
+
+```
+http2-push-detect https://localhost
+Receiving pushed resource: /assets/bell.svg
+Receiving pushed resource: /assets/menu.svg
+Receiving pushed resource: /assets/connect.svg
+Receiving pushed resource: /assets/stack.svg
+Receiving pushed resource: /assets/lightning.svg
+```
+
+Теперь поэксперементируйте, попробуйте включать и выключать `server-push` для тех или иных картинок и оцените, как это сказывается на их рендеринге.
+
+### Шаг 5. Измерение эффекта сделанных изменений
+
+Сравним вариант с `server-push` и с обычными картинками без инлайнинга и без пуша.
+
+Для этого воспользуемся `sitespeed.io` (**подробно расскажу об этом мощном инструменте в лекции №6**)
+
+#### 5.1 Анализ без `server-push`
+
+Выполните анализ версии без `server-push` и без `inline`:
+
+```
+docker run --rm -v "$(pwd)":/sitespeed.io sitespeedio/sitespeed.io --mobile -n 5 --preUrl https://host.docker.internal/ https://host.docker.internal/
+
+# --mobile - мобильный вид
+# -n 5 - 5 повторов
+# --preUrl https://host.docker.internal/ - урл, первого захода
+# https://host.docker.internal/ - урл повтороного захода, который и анализируем
+# а вообще https://host.docker.internal/ - это https://localhost, на котором стоит ваш локальный `HTTP/2-proxy` с точки зрения `docker`.
+```
+
+Откройте сгенерированный отчёт `sitespeed.io`, зайдите на вкладку `Pages`, там провалитесь в отчёт по единственной странице, и внизу воспользуйтесь кнопкой `DOWNLOAD HAR` - сохраните `HAR`-файл, закомиттьте его.
+
+#### 5.2. Анализ с `server-push`
+
+Сделайте то же, что в пункте `5.1`, но с версией, где устанавливаются заголовки `server-push`. Сохраните `HAR`-файл, закомиттьте его.
+
+#### 5.3 Сравнение результатов
+
+Сравните два полученных `HAR`-файла с помощью https://compare.sitespeed.io/
+
+**Обязательно добавьте ссылку на сравнение в описание `PR`**
+
+Вы должны увидеть на `Waterfall`, что `server-push` картинки отправляются в самую первую очередь.
+
+На `filmstrip` и `video` также можно увидеть, что `server-push` картинки действительно появляются заметно раньше.
+
+## Как сдать задание
+
+Нужно сделать `PR` в этот репозиторий с вашими изменениями кода `dev.to` для использования `server-push`, конфигом `NGinx`, ссылкой на сравнение `HAR`-файлов и описанием.
+
+### Чеклист для сдачи задания
+
+- [x] Реализация `server-push` для указанных в задании картинок
+- [x] Конфиг `NGinx`
+- [x] Ссылка на сравнение `HAR`-файлов с `server-push` и без
+- [ ] Бонус 1 про `dev.to`
+- [ ] Бонус 2 про `Falcon`
+
+## Bonus 1. Аудит dev.to
+
+Теперь, когда у вас сформировалась интуиция по работе с `HTTP/2` и `server-push`, постройте и проанализируйте отчёт `WebPageTest` для сайта `dev.to` (на проде).
+
+Видите ли вы какие-то возможности использовать возможности `HTTP/2` для оптимизации `dev.to`, исходя из отчётов `WPT`?
+
+Видите ли какие-то точки роста в остальном?
+
+## Bonus 2. Falcon HTTP/2
+
+Сервер `Falcon` https://github.com/socketry/falcon утверждает, что может сервить `Rails`-приложения и из коробки поддерживает `HTTP/2`.
+
+Попробуйте настроить работу `dev.to` с `server-push` для `Falcon`.
+
+Сделайте сравнительный бенчмарк `puma` и `falcon` на примере главной страницы `dev.to`.
 
 <div align="center">
   <br>
