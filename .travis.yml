@@ -5,7 +5,7 @@ node_js:
 sudo: required
 
 script:
-- sitespeed.io http://localhost:3000/ --budget.configPath myBudget.json -b chrome -n 1 https://2cb918e9a29d.ngrok.io
+- sitespeed.io --budget.configPath myBudget.json -b chrome -n 1 https://2cb918e9a29d.ngrok.io
 # - yarn run size
 
 after_success:
