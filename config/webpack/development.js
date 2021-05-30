@@ -1,4 +1,17 @@
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
 const environment = require('./environment');
+
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
+environment.plugins.append(
+  'BundleAnalyzer',
+  new BundleAnalyzerPlugin({
+    analyzerMode: 'static',
+    openAnalyzer: true,
+  }),
+);
+
 const config = environment.toWebpackConfig();
 
 // For more information, see https://webpack.js.org/configuration/devtool/#devtool
