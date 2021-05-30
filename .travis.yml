@@ -8,8 +8,8 @@ services:
   - docker
 
 script:
-- docker run --privileged -v "$(pwd)":/sitespeed.io sitespeedio/sitespeed.io --budget.configPath myBudget.json -n 1 https://2cb918e9a29d.ngrok.io
+- docker run --privileged -v "$(pwd)":/sitespeed.io sitespeedio/sitespeed.io --budget.configPath myBudget.json -n 1 http://cabb32ce1179.ngrok.io
 # - yarn run size
 
 after_success:
-  - yarn run lh -- --perf=90 https://2cb918e9a29d.ngrok.io
+  - yarn run lh -- --perf=90 http://cabb32ce1179.ngrok.io
