@@ -59,3 +59,5 @@ package-lock.json
 /node_modules
 yarn-debug.log*
 .yarn-integrity
+
+sitespeed-result/*

@@ -4,8 +4,11 @@ node_js:
 
 sudo: required
 
+services:
+  - docker
+
 script:
-- sitespeed.io --budget.configPath myBudget.json -b chrome -n 1 https://2cb918e9a29d.ngrok.io
+- docker run --privileged -v "$(pwd)":/sitespeed.io sitespeedio/sitespeed.io --budget.configPath myBudget.json -n 1 https://2cb918e9a29d.ngrok.io
 # - yarn run size
 
 after_success:
