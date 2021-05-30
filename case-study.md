@@ -148,3 +148,17 @@ $ sitespeed.io http://localhost:3000/ --budget.configPath myBudget.json -b chrom
 ```
 ![webpack-bundle-analyzer.4](https://github.com/rubygitflow/rails-optimization-task6/raw/profiler6/statistics_report/webpack-bundle-analyzer.4.png)
 
+
+## Настройка CI. Решение
+
+Зарегистррировались на сервисе https://travis-ci.com/
+
+В локали:
+- Установили приложение от https://ngrok.com/docs.
+- Загрузили докер с `sitespeed.io`
+- Сконфигурировали файл `.travis.yml` в собственном приложении `rails-optimization-task6`
+- Осуществили выгрузку изменений в git-репозиторий 
+
+Получили автоматичекий тестовый сервер на площадке `travis-ci.com`:
+https://travis-ci.com/github/rubygitflow/rails-optimization-task6
+с результатом прохождения теста на бюджет.
