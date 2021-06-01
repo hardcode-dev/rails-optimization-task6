@@ -51,4 +51,9 @@ docker run --privileged --rm --net=host -v "$(pwd)":/sitespeed.io sitespeedio/si
 
 ### Настройка CI
 
+Впервые попробовал гитхабовский CI, оказалось удобно. Развернул ngrok, запушил workflow -
+билд прошел [успешно](https://github.com/dmi3-bu/rails-optimization-task6/actions/runs/895412470)
+
 ### Результаты
+
+В ходе оптимизации бандла, удалось уложиться в бюджет и защитить результат от деградации с помощью CI.
