@@ -1,0 +1,15 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v1
+      - name: run sitespeed.io test
+        uses: docker://sitespeedio/sitespeed.io:9.8.1-action
+        with:
+          args: http://d4bdbbefed3c.ngrok.io/  -n 1 --budget.configPath /github/workspace/homeBudget.json
