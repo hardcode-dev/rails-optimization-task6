@@ -21,6 +21,6 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: sitespeed js test
-        uses: docker://sitespeedio/sitespeed.io:17.8.1-action
+        uses: docker://sitespeedio/sitespeed.io:17.8.1
         with:
           args: https://004ec29d9b89.ngrok.io -n 1 --budget.configPath /github/workspace/homeBudget.json
