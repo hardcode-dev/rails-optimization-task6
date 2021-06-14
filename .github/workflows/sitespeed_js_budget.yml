@@ -23,4 +23,4 @@ jobs:
       - name: sitespeed js test
         uses: docker://sitespeedio/sitespeed.io:17.8.1
         with:
-          args: https://004ec29d9b89.ngrok.io -n 1 --budget.configPath /github/workspace/homeBudget.json
+          args: https://de968c3d3d78.ngrok.io -n 1 --budget.configPath /github/workspace/homeBudget.json
