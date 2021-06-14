@@ -24,3 +24,9 @@
     module.context.indexOf('chart') === -1
     ```
 - INFO: Budget: 1 working, 0 failing tests and 0 errors
+
+### Шаг 4
+
+- установил `ngrok`
+- указал порт `3000`, на котором поднято приложение
+- создал `Githab Action` - `sitespeed_js_budget.yml`
