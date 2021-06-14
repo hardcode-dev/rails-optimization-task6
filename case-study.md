@@ -34,3 +34,4 @@
 ### Дополнительно
 
 - при прохождении тестов, появилась ошибка от `ngrok` - `Too Many Connections`
+- свалился тест, js стал использовать немного больше памяти `INFO: Failing budget JavaScript Transfer Size for https://de968c3d3d78.ngrok.io with value 538.4 KB max limit 538.1 KB`
