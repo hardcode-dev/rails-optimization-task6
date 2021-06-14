@@ -30,6 +30,7 @@
 - установил `ngrok`
 - указал порт `3000`, на котором поднято приложение
 - создал `Githab Action` - `sitespeed_js_budget.yml`
+- https://github.com/kgoryachev/rails-optimization-task6/runs/2819071876?check_suite_focus=true
 
 ### Дополнительно
 
