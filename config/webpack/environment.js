@@ -8,7 +8,6 @@
 
 // module.exports = environment;
 
-
 const { environment } = require('@rails/webpacker');
 const webpack = require('webpack');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
@@ -20,7 +19,12 @@ environment.plugins.append(
     name: 'vendor',
     minChunks: module => {
       // this assumes your vendor imports exist in the node_modules directory
-      return module.context && module.context.indexOf('node_modules') !== -1;
+      return (
+        module.context &&
+        module.context.indexOf('node_modules') !== -1 &&
+        module.context.indexOf('moment') === -1 &&
+        module.context.indexOf('chart') === -1
+      );
     },
   }),
 );
