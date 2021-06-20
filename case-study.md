@@ -19,4 +19,25 @@ Microsoft Edge 91.0.864.11 dev
 [2021-06-20 14:22:30] INFO: HTML stored in /sitespeed.io/sitespeed-result/localhost/2021-06-20-14-22-03
 ```
 
-- В бюджет пока не укладываемся.
+### Шаг 2. Оптимизация
+
+- webpack-bundle-analyzer до оптимизации:
+  ![scr01.png](report/scr01.png)
+
+- Закомментировал содержание файла `proCharts.js` - `moment` из сборки пропал.
+
+```
+[2021-06-20 23:09:26] INFO: Budget: 1 working, 0 failing tests and 0 errors
+```
+
+- Исключил из чанка vendor moment и chart:
+  ![scr02.png](report/scr02.png)
+
+- бюджет немного не дотянул:
+
+```
+[2021-06-20 23:19:17] INFO: Failing budget JavaScript Transfer Size for http://localhost:3000/ with value 450.0 KB max limit 449.2 KB
+[2021-06-20 23:19:17] INFO: Budget: 0 working, 1 failing tests and 0 errors
+```
+
+- увеличил бюджет на 5000 B
