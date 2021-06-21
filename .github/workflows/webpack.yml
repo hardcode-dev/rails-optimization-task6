@@ -1,0 +1,16 @@
+name: Webpack
+
+on:
+  - push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v1
+      - name: run sitespeedio test
+        uses: docker://sitespeedio/sitespeed.io:13.1.1-action
+        with:
+          args: http://7b2c862b8bc6.ngrok.io/ -n 1 --budget.configPath /github/workspace/config/budget.json
