@@ -41,3 +41,9 @@ Microsoft Edge 91.0.864.11 dev
 ```
 
 - увеличил бюджет на 5000 B
+
+### Шаг 3. Настройка CI
+
+- Установил ngrok
+- Настроил GitHub Actions
+- [Build success](https://github.com/avbelyshev/rails-optimization-task6/actions/runs/955492917)
