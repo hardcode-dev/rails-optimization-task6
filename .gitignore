@@ -56,3 +56,6 @@ package-lock.json
 
 #gemset
 .ruby-gemset
+
+#sitespeed reports
+/sitespeed-result

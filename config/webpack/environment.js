@@ -31,4 +31,15 @@ environment.plugins.append(
   })
 )
 
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin;
+
+environment.plugins.append(
+  'BundleAnalyzer',
+  new BundleAnalyzerPlugin({
+    analyzerMode: 'static',
+    openAnalyzer: true,
+  }),
+);
+
 module.exports = environment

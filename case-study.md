@@ -8,9 +8,9 @@
 
 ## Бюджет
 
-Давайте начнём с того, что зададимся бюджетом на объём `js` на главной странице.
+Начал с того, что задался бюджетом на объём `js` на главной странице.
 
-Создайте бюджет для `sitespeed.io`
+Создал бюджет для `sitespeed.io` Для этого добавил файл `homeBudget.json` в корень проекта со след. содержанием:
 
 ```json
 {
@@ -22,17 +22,26 @@
 }
 ```
 
-Убедитесь, что бюджет пока не соблюдается:
+Введя команду
 
 ```bash
 docker run --privileged --rm -v "$(pwd)":/sitespeed.io sitespeedio/sitespeed.io http://host.docker.internal:3000/ -n 1 --budget.configPath homeBudget.json
 ```
 
+убедился, что бюджет пока не соблюдается:
+
+```bash
+[2021-09-17 17:49:22] INFO: Failing budget JavaScript Transfer Size for http://host.docker.internal:3000/ with value 1.0 MB max limit 449.2 KB
+[2021-09-17 17:49:22] INFO: Budget: 0 working, 1 failing tests and 0 errors
+```
+
 ## Идея оптимизации
 
-- Включите в процесс сборки `webpack` плагин `webpack-bundle-analyzer`
-- Выполните анализ исходной версии приложения с помощью `webpack-bundle-analyzer`
-- убедитесь, что `moment.js` входит в сборку `vendor`
+- Включил в процесс сборки `webpack` плагин `webpack-bundle-analyzer`
+- Выполнил анализ исходной версии приложения с помощью `webpack-bundle-analyzer`
+- Убедился, что `moment.js` входит в сборку `vendor`
+- ![image](cs_docs/moment.png)
+
 - Закомментируйте всё содержимое файла `proCharts.js`
 - Выполните анализ изменённой версии в `webpack-bundle-analyzer`
 - profit
@@ -47,12 +56,12 @@ docker run --privileged --rm -v "$(pwd)":/sitespeed.io sitespeedio/sitespeed.io 
 
 Теперь проверка бюджета на главной странице должна пройти успешно!
 
-
 ## Настройка CI
 
 Теперь настроим `CI`: `Travis` или `Github Actions`.
 
 Шаги:
+
 - выставить текущую версию приложения в интернет с помощью `ngrok`
 - запушить урл `ngrok` в конфиг `CI` в `github` и тем самым триггернуть билд
 - билд должен проверять ваше приложение по урлу `ngrok` с помощью `sitespeed.io` на соблюдение бюджета
