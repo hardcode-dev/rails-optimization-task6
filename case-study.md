@@ -89,7 +89,7 @@ docker run --privileged --rm -v "$(pwd)":/sitespeed.io sitespeedio/sitespeed.io 
 - выставил текущую версию приложения в интернет с помощью `ngrok`
 - запушил урл `ngrok` в конфиг `CI` в `github` и тем самым триггернул билд
 - билд проверил приложение по урлу `ngrok` с помощью `sitespeed.io` на соблюдение бюджета
-- CI обработал успешно
+- [CI обработал успешно](https://github.com/iL53n/rails-optimization-task6/runs/3645660490)
 
 ## Сдача задания
 
