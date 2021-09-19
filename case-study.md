@@ -72,7 +72,7 @@ docker run --privileged --rm -v "$(pwd)":/sitespeed.io sitespeedio/sitespeed.io 
 ![image](cs_docs/marked.png)
 
 - сборка в `bundle-analyzer` после оптимизации 2.
-![image](cs_docs/2.png)
+  ![image](cs_docs/2.png)
 - В БЮДЖЕТ УЛОЖИЛСЯ!
 
 ```bash
@@ -86,10 +86,10 @@ docker run --privileged --rm -v "$(pwd)":/sitespeed.io sitespeedio/sitespeed.io 
 
 Шаги:
 
-- выставить текущую версию приложения в интернет с помощью `ngrok`
-- запушить урл `ngrok` в конфиг `CI` в `github` и тем самым триггернуть билд
-- билд должен проверять ваше приложение по урлу `ngrok` с помощью `sitespeed.io` на соблюдение бюджета
-- после проверки `ngrok` можно выключать
+- выставил текущую версию приложения в интернет с помощью `ngrok`
+- запушил урл `ngrok` в конфиг `CI` в `github` и тем самым триггернул билд
+- билд проверил приложение по урлу `ngrok` с помощью `sitespeed.io` на соблюдение бюджета
+- CI обработал успешно
 
 ## Сдача задания
 
