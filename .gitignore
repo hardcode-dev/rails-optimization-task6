@@ -53,3 +53,9 @@ package-lock.json
 
 #sitemap
 /public/sitemap.xml.gz
+
+#gemset
+.ruby-gemset
+
+#sitespeed reports
+/sitespeed-result
