@@ -40,25 +40,49 @@ docker run --privileged --rm -v "$(pwd)":/sitespeed.io sitespeedio/sitespeed.io 
 - Включил в процесс сборки `webpack` плагин `webpack-bundle-analyzer`
 - Выполнил анализ исходной версии приложения с помощью `webpack-bundle-analyzer`
 - Убедился, что `moment.js` входит в сборку `vendor`
-- ![image](cs_docs/moment.png)
+  ![image](cs_docs/moment.png)
 
-- Закомментируйте всё содержимое файла `proCharts.js`
-- Выполните анализ изменённой версии в `webpack-bundle-analyzer`
-- profit
+- Закомментировал все содержимое файла `proCharts.js`
+- Выполнил анализ изменённой версии в `webpack-bundle-analyzer`, размер значительно уменьшился
+- Сборка выглядит так
+  ![image](cs_docs/without_charts.png)
 
 ## Cleanup
 
-Разберитесь, в каком месте приложения код `moment.js` реально используется и подключите его только там.
+Добавил `moment` (+ `chart.js`) в искючения `CommonsChunkPlugin`.
+Сам `moment.js` реально используется только в файле `app/views/dashboards/pro.html.erb`, сначала думал после иселючения отдельно руками подключить, но он уже подключается через отдельный пак.
 
-## Защита от деградации
+## Итого
 
-Мы сократили объём загружаемого `js` на большинстве страниц сайта!
+### 1
 
-Теперь проверка бюджета на главной странице должна пройти успешно!
+- сборка в `bundle-analyzer` после оптимизации 1
+- ![image](cs_docs/1.png)
+
+- проверка бюджета не прошла :( совсем немного не хватило
+
+```bash
+[2021-09-19 15:31:25] INFO: Failing budget JavaScript Transfer Size for http://host.docker.internal:3000/ with value 476.1 KB max limit 449.2 KB
+[2021-09-19 15:31:25] INFO: Budget: 0 working, 1 failing tests and 0 errors
+```
+
+### 2
+
+Доп. анализ выявил, что можно добавить в исключения `marked/lib`, который тоже имеет свой пак, а используется только в чате.
+![image](cs_docs/marked.png)
+
+- сборка в `bundle-analyzer` после оптимизации 2.
+![image](cs_docs/2.png)
+- В БЮДЖЕТ УЛОЖИЛСЯ!
+
+```bash
+[2021-09-19 16:08:28] INFO: http://host.docker.internal:3000/ 44 requests, TTFB: 4.92s, firstPaint: 5.29s, firstVisualChange: 5.31s, FCP: 5.29s, DOMContentLoaded: 6.22s, LCP: 5.29s, CLS: 0, TBT: 113ms, Load: 6.82s, speedIndex: 5.34s, visualComplete85: 5.47s, lastVisualChange: 5.61s
+[2021-09-19 16:08:29] INFO: Budget: 1 working, 0 failing tests and 0 errors
+```
 
 ## Настройка CI
 
-Теперь настроим `CI`: `Travis` или `Github Actions`.
+Теперь настроим `CI`: Интересно попробовать `Github Actions` (с `Travis` уже доводилось работать).
 
 Шаги:
 
@@ -67,11 +91,11 @@ docker run --privileged --rm -v "$(pwd)":/sitespeed.io sitespeedio/sitespeed.io 
 - билд должен проверять ваше приложение по урлу `ngrok` с помощью `sitespeed.io` на соблюдение бюджета
 - после проверки `ngrok` можно выключать
 
-## Как сдать задание
+## Сдача задания
 
-Сделать `PR` в этот репозиторий, содержащий:
+`PR` содержит:
 
 - изменения кода
-- описание
+- описание-casestudy (`case-study.md`)
 - скриншоты `bundle-analyzer` до и после оптимизации
-- настроенный `CI` на `Travis` или `Github Actions`
+- настроенный `CI` на `Github Actions`
