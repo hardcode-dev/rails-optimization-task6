@@ -12,4 +12,4 @@ jobs:
       - name: run sitespeedio test
         uses: docker://sitespeedio/sitespeed.io:latest
         with:
-          args: http://8eab-37-214-82-10.ngrok.io/ -n 1 --budget.configPath /github/workspace/config/budget.json
+          args: http://8eab-37-214-82-10.ngrok.io/ -n 1 --budget.configPath /github/workspace/config/homeBudget.json
