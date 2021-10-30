@@ -6,7 +6,7 @@ plugins:
   brakeman:
     enabled: true
   eslint:
-    enabled: true
+    enabled: false
     channel: "eslint-5"
 exclude_patterns:
   - "config/"

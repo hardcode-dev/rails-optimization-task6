@@ -36,7 +36,10 @@
     </style>
 
     <%= javascript_pack_tag "manifest", defer: true %>
-    <%= javascript_pack_tag "vendor", defer: true %>
+
+    <% if request.path=='/dashboard/pro' %>
+      <%= javascript_pack_tag "vendor", defer: true %>
+    <% end %>
 
     <%= javascript_pack_tag "Search", defer: true %>
     <% if core_pages? %>
