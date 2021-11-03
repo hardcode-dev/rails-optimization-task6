@@ -45,3 +45,12 @@ docker run --privileged --rm --net=host -v "$(pwd)":/sitespeed.io sitespeedio/si
 ```
 [2021-11-03 11:14:23] INFO: Budget: 1 working, 0 failing tests and 0 errors
 ```
+
+### Step 5
+
+- Установил `ngrok`
+- Создал конфиг для `Githab Action`
+- Запушил изменения
+- Все прошло успешно
+
+![img_2.png](img_2.png)
