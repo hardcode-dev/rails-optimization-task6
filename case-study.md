@@ -14,3 +14,14 @@
 - Добавил webpack-bundle-analyzer, прогнал проверку. Основная часть vendor - moment.js и chart.js
   ![image](case-study-images/bundle-analyzer1.png)
 - Закомментировал всё содержимое файла proCharts.js. Объем vendor сократился до 450KB.
+  ![image](case-study-images/bundle-analyzer2.png)
+
+### Оптимизация
+
+- proCharts.js подключается в `app/views/dashboards/pro.html.erb`.
+  Подключение происходит через отдельный pack, тем не менее этот pack попадает в vendor сборку.
+- Отключаем с помощью CommonsChunkVendor плагина. webpack-bundle-analyzer показал что moment и chart
+  исключены из vendor.
+  ![image](case-study-images/bundle-analyzer3.png)
+
+### Выводы
