@@ -23,5 +23,7 @@
 - Отключаем с помощью CommonsChunkVendor плагина. webpack-bundle-analyzer показал что moment и chart
   исключены из vendor.
   ![image](case-study-images/bundle-analyzer3.png)
+- текущее значение метрики почти уложилось в бюджет (value: 475.8 KB, max limit: 449.2 KB),
+  повысим бюджет назначительно для обеспечения прохождения проверки.
 
 ### Выводы
