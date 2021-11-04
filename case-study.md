@@ -46,3 +46,8 @@ JavaScript Transfer Size with value 1.0 MB limit max 449.2 KB
 JavaScript Transfer Size with value 476.3 KB limit max 449.2 KB
 
 Чуть-чуть поменял бюджет...
+
+Установил ngrock
+Запушил изменения
+На данном урле http://2ede-78-37-55-49.ngrok.io открылся dev.to.
+Все прошло успешно!
