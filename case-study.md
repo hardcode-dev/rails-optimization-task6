@@ -22,3 +22,27 @@ Microsoft Edge 93.0.961.10 dev
 JavaScript Transfer Size with value 1.0 MB limit max 449.2 KB
 
 - В бюджет пока не укладываемся.
+
+### Шаг 2. Оптимизация
+
+- webpack-bundle-analyzer до оптимизации: report/WBA_before.png
+
+- Закомментировал содержание файла `proCharts.js` - `moment` из сборки пропал.
+
+```
+[2021-06-20 23:09:26] INFO: Budget: 1 working, 0 failing tests and 0 errors
+```
+
+- Исключил из чанка vendor moment и chart: report/WBA_after.png
+
+- бюджет немного не дотянул:
+
+```
+[2021-11-04 18:56:34] INFO: Failing budget JavaScript Transfer Size for http://localhost:3000/ with value 476.3 KB max limit 449.2 KB
+[2021-11-04 18:56:34] INFO: Budget: 0 working, 1 failing tests and 0 errors
+[2021-11-04 18:56:37] INFO: HTML stored in /sitespeed.io/sitespeed-result/localhost/2021-11-04-18-55-58
+```
+
+JavaScript Transfer Size with value 476.3 KB limit max 449.2 KB
+
+Чуть-чуть поменял бюджет...
