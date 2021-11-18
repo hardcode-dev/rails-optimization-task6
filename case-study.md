@@ -56,3 +56,7 @@ $ sitespeed.io http://localhost:3000/ -n 1 --budget.configPath budget.json
 ```
 
 Оптимизацию можно считать успешной.
+
+# Шаг 4: Travis CI
+
+Заменил CI конфиг на приведенный в лекции.
