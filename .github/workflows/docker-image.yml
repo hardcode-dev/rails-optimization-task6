@@ -8,8 +8,8 @@ jobs:
     
     steps:
     - name: checkout code
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - name: run sitespeedio test
-      uses: docker://sitespeedio/sitespeed.io:9.8.1-action
+      uses: docker://sitespeedio/sitespeed.io:latest
       with:
         args: http://6a18-31-130-146-232.ngrok.io -n 1 --budget.configPath budget.json 
