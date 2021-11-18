@@ -11,4 +11,4 @@ script:
   - docker run --privileged -v "$(pwd)":/sitespeed.io sitespeedio/sitespeed.io --budget.configPath /budget.json -n 1 http://6a18-31-130-146-232.ngrok.io
 
 after_success:
-  - yarn run lh -- --perf=90 https://6a18-31-130-146-232.ngrok.io
+  - yarn run lh -- --perf=90 http://6a18-31-130-146-232.ngrok.io
