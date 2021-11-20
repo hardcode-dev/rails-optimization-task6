@@ -1,0 +1,12 @@
+name: GitHub Actions Demo
+on: [push]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: run sitespeedio test
+        uses: docker://sitespeedio/sitespeed.io:latest
+        with:
+          args: http://7756-46-242-27-51.ngrok.io -n 1 --budget.configPath homeBudget.json
