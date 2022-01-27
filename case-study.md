@@ -28,7 +28,7 @@ sitespeed.io http://localhost:3000/ -n 1 --budget.configPath homeBudget.json
 Failing budget JavaScript Transfer Size for http://localhost:3000 with value 634.0 KB max limit 449.2 KB
 ```
 
-- В бюджет не уложились, видно другие пакеты в vendor стали тяжелее, поэтому повышаем бюджет до 650 KB
+- В бюджет не уложились, видно другие пакеты стали тяжелее, поэтому повышаем бюджет до 650 KB
 
 
 ## Настройка CI
