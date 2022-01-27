@@ -1,0 +1,15 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build-app:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: javascript size check
+        uses: docker://sitespeedio/sitespeed.io:latest
+        with:
+          args: http://d15d-94-229-227-71.ngrok.io -n 1 --budget.configPath ./homeBudget.json
