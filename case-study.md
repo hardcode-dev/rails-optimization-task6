@@ -29,3 +29,8 @@ Failing budget JavaScript Transfer Size for http://localhost:3000 with value 634
 ```
 
 - В бюджет не уложились, видно другие пакеты в vendor стали тяжелее, поэтому повышаем бюджет до 650 KB
+
+
+## Настройка CI
+
+![example workflow](https://github.com/OrdinaryMagic/rails-optimization-task6/actions/workflows/master.yml/badge.svg)
