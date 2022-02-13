@@ -1,0 +1,14 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build-app:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: js budget check
+        uses: docker://sitespeedio/sitespeed.io:latest
+        with:
+          args: https://8b1b-2a02-a310-c25a-f500-a479-5be6-50d3-1088.ngrok.io  -n 1 --budget.configPath ./budget.json
