@@ -10,7 +10,7 @@ services:
       - db
     environment:
       RAILS_ENV: development
-      DATABASE_URL: postgres://postgres:mysecretpassword@db:5432/postgres
+      DATABASE_URL: postgres://postgres:password@db:5432/postgres
       YARN_INTEGRITY_ENABLED: "false"
     volumes:
       - .:/usr/src/app
@@ -24,6 +24,8 @@ services:
     <<: *rails_base
     command: ./bin/webpack-dev-server
   db:
-    image: postgres
+    image: postgres:9.6-alpine
     ports:
     - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: password
