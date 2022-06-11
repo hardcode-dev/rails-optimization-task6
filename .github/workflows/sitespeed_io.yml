@@ -1,0 +1,15 @@
+name: sitespeed.io
+on:
+  push:
+    branches:
+      - sasha370
+
+jobs:
+  run-sitespeed:
+    runs-on: ubuntu-latest
+    name: running sitespeed.io
+    steps:
+      - name: code checkout
+        uses: actions/checkout@v2
+      - name: running sitespeed.io container with arguments and optional Docker options
+        run: docker run -v "$(pwd):/sitespeed.io" sitespeedio/sitespeed.io:latest https://d158-5-227-26-138.ngrok.io --budget.configPath ./homeBudget.json -n 1
