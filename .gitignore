@@ -27,7 +27,7 @@ coverage
 
 # Ignore node_modules
 node_modules/
-
+screenshots
 # Generated js bundles
 /app/assets/javascripts/generated/*
 latest.dump
