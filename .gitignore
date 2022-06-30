@@ -44,6 +44,7 @@ config/database.yml
 # Ignore storybook static site generation
 storybook-static/
 yarn-error.log
+sitespeed-result
 
 # Ignore package-lock.json because we use yarn
 package-lock.json

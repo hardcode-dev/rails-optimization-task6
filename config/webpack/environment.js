@@ -11,6 +11,7 @@
 
 const { environment } = require('@rails/webpacker')
 const webpack = require('webpack')
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
 environment.plugins.append(
   'CommonsChunkVendor',
@@ -29,6 +30,11 @@ environment.plugins.append(
     name: 'manifest',
     minChunks: Infinity
   })
+)
+
+environment.plugins.append(
+  'BundleAnalyzer',
+  new BundleAnalyzerPlugin()
 )
 
 module.exports = environment
