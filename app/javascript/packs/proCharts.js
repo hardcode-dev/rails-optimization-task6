@@ -1,4 +1,4 @@
-import Chart from 'chart.js/dist/Chart.js';
+import Chart from 'chart.js';
 
 const reactionsCanvas = document.getElementById('reactionsChart');
 const commentsCanvas = document.getElementById('commentsChart');
