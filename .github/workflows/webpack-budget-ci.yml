@@ -1,0 +1,10 @@
+name: Webpack Budget CI
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: code checkout
+        uses: actions/checkout@v2
+      - name: run sitespeedio test
+        run: docker run -v "$(pwd):/sitespeed.io" sitespeedio/sitespeed.io:latest https://f3c5-93-79-0-255.eu.ngrok.io/ --budget.configPath homeBudget.json -n 1
