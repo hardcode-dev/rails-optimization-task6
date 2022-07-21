@@ -18,6 +18,7 @@ vendor/bundle
 .torus.json
 coverage
 /tags
+sitespeed-result/**/*
 
 # Ignore public uploads
 /public/uploads/*
