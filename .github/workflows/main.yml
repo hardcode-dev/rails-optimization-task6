@@ -1,0 +1,13 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: sitespeedio
+    steps:
+    - name: checkout code
+      uses: actions/checkout@v2
+    - name: run sitespeedio test
+      run: docker run -v "$(pwd):/sitespeed.io" sitespeedio/sitespeed.io:latest https://8b18-5-152-41-9.ngrok-free.app/ -n 1 --budget.configPath budget.json

@@ -1,4 +1,20 @@
 GIT
+  remote: https://github.com/forem/acts_as_follower.git
+  revision: 06393d3693a1a3d4b390aec4976c8b8f3a81cf01
+  branch: master
+  specs:
+    acts_as_follower (0.2.1)
+      activerecord (>= 4.0)
+
+GIT
+  remote: https://github.com/jakeonrails/fix-db-schema-conflicts.git
+  revision: 1e94f518503f1d1addd6ed052454efcbec0b3c6a
+  branch: master
+  specs:
+    fix-db-schema-conflicts (3.1.0)
+      rubocop (>= 0.38.0)
+
+GIT
   remote: https://github.com/stympy/faker.git
   revision: 9910aa58d92c018abab25d491191576fcc1a7707
   branch: master
@@ -58,7 +74,6 @@ GEM
       tzinfo (~> 1.1)
     acts-as-taggable-on (5.0.0)
       activerecord (>= 4.2.8)
-    acts_as_follower (0.2.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
     administrate (0.11.0)
@@ -307,8 +322,6 @@ GEM
       thor (~> 0.14)
     fission (0.5.0)
       CFPropertyList (~> 2.2)
-    fix-db-schema-conflicts (3.1.0)
-      rubocop (>= 0.38.0)
     fog (1.41.0)
       fog-aliyun (>= 0.1.0)
       fog-atmos
@@ -830,10 +843,6 @@ GEM
       tilt (~> 2.0)
     sitemap_generator (6.0.2)
       builder (~> 3.0)
-    skylight (3.1.4)
-      skylight-core (= 3.1.4)
-    skylight-core (3.1.4)
-      activesupport (>= 4.2.0)
     slack-notifier (2.3.2)
     smart_properties (1.13.1)
     spring (2.0.2)
@@ -935,7 +944,7 @@ DEPENDENCIES
   actionpack-action_caching (~> 1.2)
   active_record_union (~> 1.3)
   acts-as-taggable-on (~> 5.0)
-  acts_as_follower
+  acts_as_follower!
   addressable (~> 2.5, >= 2.5.2)
   administrate (~> 0.11)
   ahoy_email (~> 0.5)
@@ -979,7 +988,7 @@ DEPENDENCIES
   fastly-rails (~> 0.8)
   feedjira (~> 2.2)
   figaro (~> 1.1)
-  fix-db-schema-conflicts
+  fix-db-schema-conflicts!
   fog (~> 1.41)
   front_matter_parser (~> 0.2)
   gemoji (~> 3.0.0)
@@ -1044,7 +1053,6 @@ DEPENDENCIES
   simplecov (~> 0.16)
   sinatra (~> 2.0)
   sitemap_generator (~> 6.0)
-  skylight (~> 3.1)
   slack-notifier (~> 2.3)
   spring (~> 2.0)
   spring-commands-rspec (~> 1.0)
