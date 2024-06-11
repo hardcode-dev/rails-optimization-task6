@@ -48,6 +48,8 @@
   <img src="ba-5.png" width="49%">
   <img src="ss-5.png" width="49%">
 
-## Настройка travis-ci
+## Настройка travis-ci и github actions
+
+Настроили CI и добились успешного билда
 
 
