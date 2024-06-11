@@ -8,7 +8,7 @@ services:
   - docker
 
 script:
-- docker run --privileged -v "$(pwd)":/sitespeed.io sitespeedio/sitespeed.io --budget.configPath /sitespeed.io/budget.json -n 1 https://1ce0-79-101-188-107.ngrok-free.app
+- docker run --privileged -v "$(pwd)":/sitespeed.io sitespeedio/sitespeed.io --budget.configPath sitespeed.io/budget.json -n 1 https://1ce0-79-101-188-107.ngrok-free.app
 # - yarn run size
 
 after_success:
