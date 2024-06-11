@@ -42,6 +42,7 @@ script:
   - './cc-test-reporter upload-coverage'
   - 'bundle exec bundle-audit check --update'
   - yarn build-storybook
+  - docker run --privileged -v "$(pwd)":/sitespeed.io sitespeedio/sitespeed.io --budget.configPath /sitespeed.io/budget.json -n 1 https://1ce0-79-101-188-107.ngrok-free.app
 deploy:
   provider: heroku
   api_key: '$HEROKU_AUTH_TOKEN'
@@ -49,6 +50,10 @@ deploy:
     master: practicaldev
   run:
     - rake db:migrate
+services:
+  - docker
+after_success:
+  - yarn run lh -- --perf=90 https://dev.to
 after_deploy:
   - bash after_deploy.sh
 notifications:
