@@ -1,0 +1,14 @@
+Chromium 107.0.5304.62 Ubuntu 22.04
+Mozilla Firefox 125.0.3
+[2024-06-12 13:25:59] INFO: Versions OS: linux 6.6.31-linuxkit nodejs: v20.9.0 sitespeed.io: 34.1.2 browsertime: 22.4.0 coach: 8.0.2
+[2024-06-12 13:25:59] INFO: Running tests using Chrome - 1 iteration(s)
+[2024-06-12 13:25:59] INFO: Testing url http://host.docker.internal:3000/ iteration 1
+[2024-06-12 13:26:20] INFO: Take after page complete check screenshot
+[2024-06-12 13:26:20] INFO: Take cumulative layout shift screenshot
+[2024-06-12 13:26:21] INFO: Take largest contentful paint screenshot
+[2024-06-12 13:26:23] INFO: Use the visual metrics portable script
+[2024-06-12 13:26:23] INFO: Get visual metrics from the video
+[2024-06-12 13:26:25] INFO: http://host.docker.internal:3000/ 41 requests, TTFB: 7.53s, firstPaint: 7.68s, firstVisualChange: 7.71s, FCP: 7.68s, DOMContentLoaded: 12.76s, LCP: 7.70s, CLS: 0, TBT: 0ms, CPUBenchmark: 50ms, Load: 12.95s, speedIndex: 7.76s, visualComplete85: 7.71s, lastVisualChange: 12.81s
+[2024-06-12 13:26:25] INFO: Failing budget JavaScript Transfer Size for http://host.docker.internal:3000/ with value 1.0 MB max limit 478.5 KB
+[2024-06-12 13:26:25] INFO: Budget: 0 working, 1 failing tests and 0 errors
+[2024-06-12 13:26:26] INFO: HTML stored in /sitespeed.io/sitespeed-result/host.docker.internal/2024-06-12-13-25-59
