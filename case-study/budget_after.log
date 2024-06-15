@@ -1,0 +1,13 @@
+Chromium 107.0.5304.62 Ubuntu 22.04
+Mozilla Firefox 125.0.3
+[2024-06-12 13:24:43] INFO: Versions OS: linux 6.6.31-linuxkit nodejs: v20.9.0 sitespeed.io: 34.1.2 browsertime: 22.4.0 coach: 8.0.2
+[2024-06-12 13:24:43] INFO: Running tests using Chrome - 1 iteration(s)
+[2024-06-12 13:24:43] INFO: Testing url http://host.docker.internal:3000/ iteration 1
+[2024-06-12 13:24:52] INFO: Take after page complete check screenshot
+[2024-06-12 13:24:52] INFO: Take cumulative layout shift screenshot
+[2024-06-12 13:24:53] INFO: Take largest contentful paint screenshot
+[2024-06-12 13:24:55] INFO: Use the visual metrics portable script
+[2024-06-12 13:24:55] INFO: Get visual metrics from the video
+[2024-06-12 13:24:56] INFO: http://host.docker.internal:3000/ 41 requests, TTFB: 554ms, firstPaint: 755ms, firstVisualChange: 750ms, FCP: 755ms, DOMContentLoaded: 806ms, LCP: 743ms, CLS: 0, TBT: 0ms, CPUBenchmark: 49ms, Load: 1.08s, speedIndex: 754ms, visualComplete85: 750ms, lastVisualChange: 812ms
+[2024-06-12 13:24:56] INFO: Budget: 1 working, 0 failing tests and 0 errors
+[2024-06-12 13:24:57] INFO: HTML stored in /sitespeed.io/sitespeed-result/host.docker.internal/2024-06-12-13-24-43
