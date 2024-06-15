@@ -1,0 +1,11 @@
+name: sitespeed.io
+on: push
+jobs:
+  run-sitespeed:
+    runs-on: ubuntu-latest
+    name: running sitespeed.io
+    steps:
+      - name: code checkout
+        uses: actions/checkout@v2
+      - name: running sitespeed.io container with arguments and optional Docker options
+        run: docker run -v "$(pwd):/sitespeed.io" sitespeedio/sitespeed.io:34.2.0 https://www.sitespeed.io --budget.configPath homeBudget.json -n 1 
