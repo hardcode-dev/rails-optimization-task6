@@ -7,6 +7,6 @@ jobs:
       - name: checkout
         uses: actions/checkout@v4
       - name: run sitespeed.io
-        run:
+        run: |
           cd .dev_to
-          docker run -v "$(pwd)":/"sitespeed.io" :sitespeedio/sitespeed.io" "https://f8e6-2a02-8109-8600-100-dc8e-a1ae-a255-9abd.ngrok-free.app" -n 1 --budget.configPath homeBudget.json
+          docker run -v "$(pwd)":/sitespeed.io sitespeedio/sitespeed.io https://f8e6-2a02-8109-8600-100-dc8e-a1ae-a255-9abd.ngrok-free.app -n 1 --budget.configPath homeBudget.json
