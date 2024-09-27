@@ -52,6 +52,7 @@ package-lock.json
 
 #Jetbrains Tools
 .idea/
+sitespeed-result
 
 #sitemap
 /public/sitemap.xml.gz
