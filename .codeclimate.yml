@@ -5,9 +5,6 @@ plugins:
     channel: rubocop-0-63
   brakeman:
     enabled: true
-  eslint:
-    enabled: true
-    channel: "eslint-5"
 exclude_patterns:
   - "config/"
   - "db/"
