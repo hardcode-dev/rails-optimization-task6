@@ -1,19 +1,22 @@
 # Setup через docker, docker-compose и dip
 
-После успешного запуска проекта в 4м задании тут должно уже быть легко.
+После успешного запуска проекта в 4м задании с сетапом тут должно уже быть легко.
 
-- probably change `.ruby-version` file with your ruby version
-- `cp ../rails-optimization-task4/.dev_to/.env .dev_to` (for your algolia keys and other ENVs)
-- `cd .dev_to`
-- `dip provision`
-- `docker-compose up`
-- open http://localhost:3000 in your browser
+# Работа через docker, docker-compose и dip (дублирую на всякий случай)
+
+- .ruby_version <- ваша версия `ruby`
+- скопировать файл `.dev_to/.env` со своими ключами от Algolia из 4го задания
+- cd .dev_to
+- docker-compose build
+- dip provision
+- docker-compose up
+- open localhost:3000 in your browser
 
 After setup you can
 
+- dip bash - to do any other commands or just to peek around
 - dip bundle - to bundle install after adding gems
 - dip setup - to rerun bin/setup
-- dip bash - to do any other commands or just to peek around
 
 # Задание №6
 
