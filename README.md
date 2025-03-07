@@ -70,6 +70,7 @@ docker run --privileged --rm -v "$(pwd)":/sitespeed.io sitespeedio/sitespeed.io 
 - при этом чтобы `moment.js` не было в `vendor.js`, а только там где он нужен (см `CommonsChunkPlugin` в `environment.js`)
 - проверить что бюджет `homeBudget` на главной странице соблюдается
 - **hint!** если в бюджет немного не влезаете, то проверьте, не осталось ли в `vendor.js` каких-то *зависимостей* `chart.js` (см `yarn.lock`, `dip report`)
+- **hint** мб просто поставить для `vendor.js` настройку `minChunks: 2` в `CommonsChunkPlugin`?
 
 ## Защита от деградации с помощью CI
 
