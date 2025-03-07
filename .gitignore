@@ -6,6 +6,9 @@
 
 .dev_to/.env
 
+sitespeed-result/
+public/report.html
+
 # Ignore bundler config.
 /.bundle
 vendor/bundle

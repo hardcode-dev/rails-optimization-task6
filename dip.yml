@@ -11,6 +11,12 @@ compose:
   project_name: dev_to
 
 interaction:
+  # bundle-analyze-report
+  report:
+    description: Build and open a webpack-bundle-analyzer report
+    service: rails
+    command: bin/webpack && open public/report.html
+
   # This command spins up a Rails container with the required dependencies (such as databases),
   # and opens a terminal within it.
   runner:
