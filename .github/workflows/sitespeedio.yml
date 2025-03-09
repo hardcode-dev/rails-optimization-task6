@@ -1,0 +1,10 @@
+name: sitespeedio
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: run sitespeed.io
+        run: docker run --privileged --rm -v "$(pwd):/sitespeed.io" sitespeedio/sitespeed.io https://03d1-2a0b-6204-12ef-c100-6424-8e72-d575-70d0.ngrok-free.app -n 1 --budget.configPath .dev_to/sitespeed/homeBudget.json
